@@ -71,12 +71,50 @@ data = normalize_data(data)
 ### Train and Test Data Splitting 
 The dataset is divided into training and testing sets. The training set is used to train the machine learning models, while the testing set evaluates their performance on unseen data.
 
+```python
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
+```
+
 ### Data Augmentation
 Data augmentation techniques are applied to increase the diversity of the training data, which helps improve the model's robustness.
 
 
 ### Model Training, Evaluation, and Analysis
+
 Various classifiers, including SVM, K-Nearest Neighbors (KNN), and Naive Bayes, are used for classification. Their performance is evaluated using accuracy, precision, and F1-score. Confusion matrices and classification reports are generated to provide deeper insights into the models' performance.
+```python
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score, precision_score, f1_score, confusion_matrix, classification_report
+
+# Initialize classifiers
+svm_clf = SVC()
+knn_clf = KNeighborsClassifier()
+nb_clf = GaussianNB()
+
+# Train classifiers
+svm_clf.fit(X_train, y_train)
+knn_clf.fit(X_train, y_train)
+nb_clf.fit(X_train, y_train)
+
+# Evaluate classifiers
+y_pred_svm = svm_clf.predict(X_test)
+y_pred_knn = knn_clf.predict(X_test)
+y_pred_nb = nb_clf.predict(X_test)
+
+# Print evaluation metrics
+print("SVM Classifier:")
+print(classification_report(y_test, y_pred_svm))
+
+print("KNN Classifier:")
+print(classification_report(y_test, y_pred_knn))
+
+print("Naive Bayes Classifier:")
+print(classification_report(y_test, y_pred_nb))
+```
 
 ## Result
 
